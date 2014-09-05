@@ -1,0 +1,21 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var chat = io.connect('http://localhost/chat')
+    , news = io.connect('http://localhost/news');
+  
+  chat.on('a message', function(data){
+    console.log('chat message:' + data.msg);
+  });
+  chat.on('item', function(data){
+    // ŒÄ‚Î‚ê‚È‚¢
+    console.log('chat item:' + data.news);
+  });
+  
+  news.on('a message', function(data){
+    // ŒÄ‚Î‚ê‚È‚¢
+    console.log('news message:' + data.msg);
+  });
+  news.on('item', function(data){
+    console.log('news item:' + data.news);
+  });
+</script>

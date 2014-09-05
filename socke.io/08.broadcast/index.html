@@ -1,0 +1,26 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect();
+
+socket.on('connect', function() {
+});
+
+  socket.on('user connected', function(num){
+    $('#log').text(num + '人が接続しました');
+  });
+  socket.on('con', function(num){
+    $('#log2').text("あなたは" + num + '人目の接続です');
+  });
+
+</script>
+<script src="/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div id="log">はひふへほー</div>
+<div id="log2">はひふへほー</div>
+</body>
+</html>
+

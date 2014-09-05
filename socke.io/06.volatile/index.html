@@ -1,0 +1,20 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect('http://localhost:8080');
+
+socket.on('connect', function() {
+  socket.on('volatile msg', function (msg) {
+    if(msg == 100) socket.emit('stop');
+    $('#log').text(msg);
+  });
+});
+</script>
+<script src="/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div id="log">はひふへほー</div>
+</body>
+</html>

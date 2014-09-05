@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<script src="/socket.io/socket.io.js"></script>
+<script src="/jquery-1.7.2.min.js"></script>
+<script>
+  var socket = io.connect('http://localhost:8080');
+  
+  socket.on("ready", function(){
+    $("#log").append("ready");
+  });
+  socket.on("resmsg", function(msg){
+    $("#log").append(msg);
+  });
+  jQuery(function($){
+    $('#btn').click(function(){
+      socket.emit("set nickname", $("#name").val());
+      console.log($("#name").val());
+      socket.emit("msg");
+    });
+    
+  });
+</script>
+</head>
+<body>
+<input type="text" id="name" value="" /> <input type="button" id="btn" value="push!" />
+<div id="log">ここに文字が入ります</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect(); // TIP: .connect with no args does auto-discovery
+
+socket.on('connect', function() { // TIP: you can avoid listening on `connect` and listen on events directly too!
+  socket.emit('ferret', 'tobi', function (data) {
+    console.log(data);
+  });
+  
+  socket.on('msg push', function(msg, fn){
+    fn(msg + ' is hoge!');
+  });
+});
+</script>
+<script src="/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div id="log">はひふへほー</div>
+</body>
+</html>
+
