@@ -25,7 +25,7 @@ function handler (req, res) {
 }
 
 // ソケットが接続された時のイベント
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
   // クライアントのnewsイベントを実行
   socket.emit('news', { hello: 'world' });
 
