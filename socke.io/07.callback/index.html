@@ -3,9 +3,11 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <script src="/socket.io/socket.io.js"></script>
 <script>
-var socket = io.connect(); // TIP: .connect with no args does auto-discovery
+var socket = io(); // TIP: 引数なしの io() は自動検索する
 
-socket.on('connect', function() { // TIP: you can avoid listening on `connect` and listen on events directly too!
+// TIP: `connect` を待ち受けなくてもいいし、直接イベントを待ち受けてもいい
+socket.on('connect', function() {
+  // 'ferret' を実行
   socket.emit('ferret', 'tobi', function (data) {
     console.log(data);
   });
