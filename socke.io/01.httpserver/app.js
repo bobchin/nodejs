@@ -1,11 +1,12 @@
-var app = require('http').createServer(handler)
-  , io = require('socket.io').listen(app)
-  , fs = require('fs')
+var app = require('http').createServer(handler);
+var io = require('socket.io')(app);
+var fs = require('fs');
 
-io.set('log level', 2);
 app.listen(8080);
 
+// HTTPサーバのrequestイベント
 function handler (req, res) {
+  // index.html or jquery-1.7.2.min.js を返す
   var filename = __dirname + '/index.html';
   if (req.url == '/jquery-1.7.2.min.js') {
     filename = __dirname + req.url;
@@ -23,8 +24,11 @@ function handler (req, res) {
   );
 }
 
+// ソケットが接続された時のイベント
 io.sockets.on('connection', function (socket) {
+  // クライアントのnewsイベントを実行
   socket.emit('news', { hello: 'world' });
+
   socket.on('my other event', function (data) {
     console.log(data);
   });
