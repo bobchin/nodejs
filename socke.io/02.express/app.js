@@ -1,22 +1,17 @@
-// var app = require('express').createServer()
-//   , io = require('socket.io').listen(app);
-// io.set('log level', 2);
-// app.listen(8080);
-var app = require('express')()
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server);
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-io.set('log level', 2);
 server.listen(8080);
 
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
-app.get('/jquery-1.7.2.min.js', function (req, res) {
-  res.sendfile(__dirname + '/jquery-1.7.2.min.js');
+app.get('/:file?', function (req, res) {
+  if (req.params.file === undefined) {
+  	req.params.file = 'index.html';
+  }
+  res.sendfile(__dirname + '/' + req.params.file);
 });
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
     console.log(data);
